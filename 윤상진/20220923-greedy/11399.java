@@ -4,25 +4,22 @@ import java.util.*;
 public class Main {
   public static void main(String[] args){
     Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int[] arr = new int[n];
+    int result = 0;
 
-    String str = scanner.next();
-    String[] nums = str.split("\\-");
-  
-    System.out.println(Arrays.toString(nums));
-
-    for(int i=0; i<nums.length; i++){
-      String[] numsPlus = nums[i].split("\\+");
-      int sum = 0;
-      
-      for(int j=0; j<numsPlus.length; j++){
-        sum += Integer.parseInt(numsPlus[j]);
-      }
-      nums[i] = String.valueOf(sum);
+    for(int i=0; i<n; i++){
+      arr[i] = scanner.nextInt();
     }
 
-    int result = Integer.parseInt(nums[0]);
-    for(int i=1; i<nums.length; i++){
-      result -= Integer.parseInt(nums[i]);
+    Arrays.sort(arr);
+
+    for(int i=1; i<n; i++){
+      arr[i] = arr[i-1] + arr[i];
+    }
+
+    for(int i=0; i<n; i++){
+      result += arr[i];
     }
 
     System.out.println(result);
